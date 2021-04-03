@@ -14,31 +14,8 @@ class Login(ByteStream):
         self.player = Player(device)
 
     def decode(self):
-        self.player.HighID = self.ReadUint32()
-        self.player.LowID = self.ReadUint32()
-        self.player.Token = self.ReadString()
-
-        self.ReadVint()
-        self.ReadVint()
-        self.ReadVint()
-        self.ReadString()
-        self.ReadUint32()
-
-        self.device.AndroidID = self.ReadString()
-
-        self.ReadString()
-
-        self.device.DeviceModel = self.ReadString()
-        self.device.OpenUDID = self.ReadString()
-        self.device.OSVersion = self.ReadString()
-        self.device.IsAndroid = self.ReadBool()
-
-        self.ReadUint32()
-        self.ReadString()
-
-        self.device.Language = self.ReadString()
+        pass
 
     def process(self):
         LoginOk(self.device).Send()
         OwnHomeData(self.device).Send()
-        # Todo : Process stuff (implement OHD)
