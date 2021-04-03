@@ -23,13 +23,9 @@ class Networking(Thread):
         self.args = args
 
     def run(self):
-        width = os.get_terminal_size().columns
-
         self.client.bind((self.address, self.port))
 
-        print('Server is listening on {}:{}'.format(self.address, self.port).center(width))
-
-        print('{}'.format('-' * (width // 2)).center(width))
+        print('Server is listening on {}:{}'.format(self.address, self.port))
 
         while True:
             self.client.listen(5)
@@ -69,8 +65,7 @@ class ClientThread(Thread):
 
             if len(header) >= 7:
                 if length == len(data):
-                    if self.debug:
-                        print('[*] {} received'.format(packetid))
+                    print('[*] {} received'.format(packetid))
 
                     try:
                         decrypted = self.device.decrypt(data)
